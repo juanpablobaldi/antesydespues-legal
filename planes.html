@@ -12,9 +12,11 @@
   están referenciadas en la metadata del App Store y Apple no permite
   dirigir a compras externas desde la app o su metadata.
 
-  Suscripciones de Mercado Pago ya enlazadas (26/7/2026):
+  Checkouts generados por API vía mp-checkout (Edge Function) con el email de
+  la app como external_reference — así MP notifica al webhook y el matching es
+  exacto. Los links estáticos del panel (mpago.la) quedaron obsoletos: NO
+  usarlos (no notifican al webhook). Precios: editar acá Y en mp-checkout.
   Profesional $9.500 · Clínica $27.000 (7 días de prueba) · Clínica Pro $80.000
-  Redirect post-pago: gracias.html
   ══════════════════════════════════════════════════════════════════
 -->
 <style>
@@ -90,7 +92,7 @@ Elegí tu plan y tu clínica queda activada en el día.</p>
       <li>Hasta 1.000 fotos</li>
       <li>1 profesional</li>
     </ul>
-    <a class="cta" href="https://mpago.la/1TMh8H1">Suscribirme con Mercado Pago</a>
+    <a class="cta" href="#" data-plan="profesional">Suscribirme con Mercado Pago</a>
   </div>
 
   <div class="card recommended">
@@ -105,7 +107,7 @@ Elegí tu plan y tu clínica queda activada en el día.</p>
       <li>Hasta 15.000 fotos</li>
       <li>Videos en sesiones de fotos (10 seg)</li>
     </ul>
-    <a class="cta" href="https://mpago.la/1VyYkmf">Suscribirme con Mercado Pago</a>
+    <a class="cta" href="#" data-plan="clinica">Suscribirme con Mercado Pago</a>
   </div>
 
   <div class="card">
@@ -118,7 +120,7 @@ Elegí tu plan y tu clínica queda activada en el día.</p>
       <li>Hasta 100.000 fotos</li>
       <li>Acceso anticipado a funciones de IA</li>
     </ul>
-    <a class="cta" href="https://mpago.la/34jJ7Ft">Suscribirme con Mercado Pago</a>
+    <a class="cta" href="#" data-plan="clinica_pro">Suscribirme con Mercado Pago</a>
   </div>
 
 </div>
@@ -157,5 +159,42 @@ Elegí tu plan y tu clínica queda activada en el día.</p>
   <a class="plain" href="privacy.html">Política de Privacidad</a></p>
 </div>
 
+
+<dialog id="emailDialog" style="border:none;border-radius:16px;padding:28px 24px;max-width:380px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.25)">
+  <form method="dialog" id="emailForm">
+    <h3 style="margin:0 0 6px;font-size:18px">¿Con qué email usás la app?</h3>
+    <p style="margin:0 0 14px;color:#666;font-size:14px">Con ese email identificamos tu clínica y activamos el plan
+    automáticamente. Si todavía no tenés cuenta, poné el email con el que la vas a crear.</p>
+    <input id="emailInput" type="email" required placeholder="tu@email.com"
+      style="width:100%;font-size:16px;padding:12px;border:1px solid #d5d5d8;border-radius:10px;margin-bottom:14px">
+    <button id="goBtn" value="ok"
+      style="width:100%;background:#4f46e5;color:#fff;border:none;font-weight:700;font-size:16px;padding:13px;border-radius:12px;cursor:pointer">
+      Continuar a Mercado Pago</button>
+    <button value="cancel" formnovalidate
+      style="width:100%;background:none;border:none;color:#888;font-size:14px;margin-top:10px;cursor:pointer">Cancelar</button>
+  </form>
+</dialog>
+<script>
+  const CHECKOUT = 'https://qjngfuvnktpbyeodspjo.supabase.co/functions/v1/mp-checkout';
+  let planElegido = null;
+  const dlg = document.getElementById('emailDialog');
+  document.querySelectorAll('.cta[data-plan]').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      planElegido = btn.dataset.plan;
+      dlg.showModal();
+      document.getElementById('emailInput').focus();
+    });
+  });
+  document.getElementById('emailForm').addEventListener('submit', (e) => {
+    if (e.submitter && e.submitter.value === 'cancel') return;
+    const email = document.getElementById('emailInput').value.trim();
+    if (!email || !planElegido) return;
+    e.preventDefault();
+    const b = document.getElementById('goBtn');
+    b.textContent = 'Generando tu suscripción…'; b.disabled = true;
+    window.location.href = `${CHECKOUT}?plan=${planElegido}&email=${encodeURIComponent(email)}`;
+  });
+</script>
 </body>
 </html>
