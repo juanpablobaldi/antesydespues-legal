@@ -162,11 +162,16 @@ Elegí tu plan y tu clínica queda activada en el día.</p>
 
 <dialog id="emailDialog" style="border:none;border-radius:16px;padding:28px 24px;max-width:380px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.25)">
   <form method="dialog" id="emailForm">
-    <h3 style="margin:0 0 6px;font-size:18px">¿Con qué email usás la app?</h3>
-    <p style="margin:0 0 14px;color:#666;font-size:14px">Con ese email identificamos tu clínica y activamos el plan
-    automáticamente. Si todavía no tenés cuenta, poné el email con el que la vas a crear.</p>
-    <input id="emailInput" type="email" required placeholder="tu@email.com"
-      style="width:100%;font-size:16px;padding:12px;border:1px solid #d5d5d8;border-radius:10px;margin-bottom:14px">
+    <h3 style="margin:0 0 6px;font-size:18px">Tu email de Mercado Pago</h3>
+    <p style="margin:0 0 14px;color:#666;font-size:14px"><strong>Importante:</strong> tiene que ser el email de tu
+    cuenta de Mercado Pago — la suscripción queda asociada a esa cuenta y solo vos vas a poder autorizarla.</p>
+    <input id="emailInput" type="email" required placeholder="tu-email-de-mercadopago@email.com"
+      style="width:100%;font-size:16px;padding:12px;border:1px solid #d5d5d8;border-radius:10px;margin-bottom:12px">
+    <label style="display:flex;align-items:center;gap:8px;font-size:14px;color:#666;margin-bottom:12px">
+      <input type="checkbox" id="difCheck" style="width:18px;height:18px"> En la app uso otro email
+    </label>
+    <input id="appEmailInput" type="email" placeholder="tu-email-de-la-app@email.com"
+      style="display:none;width:100%;font-size:16px;padding:12px;border:1px solid #d5d5d8;border-radius:10px;margin-bottom:12px">
     <button id="goBtn" value="ok"
       style="width:100%;background:#4f46e5;color:#fff;border:none;font-weight:700;font-size:16px;padding:13px;border-radius:12px;cursor:pointer">
       Continuar a Mercado Pago</button>
@@ -197,14 +202,21 @@ Elegí tu plan y tu clínica queda activada en el día.</p>
       document.getElementById('emailInput').focus();
     });
   });
+  document.getElementById('difCheck').addEventListener('change', (e) => {
+    document.getElementById('appEmailInput').style.display = e.target.checked ? 'block' : 'none';
+  });
   document.getElementById('emailForm').addEventListener('submit', (e) => {
     if (e.submitter && e.submitter.value === 'cancel') return;
     const email = document.getElementById('emailInput').value.trim();
     if (!email || !planElegido) return;
     e.preventDefault();
+    const appEmail = document.getElementById('difCheck').checked
+      ? document.getElementById('appEmailInput').value.trim() : '';
     const b = document.getElementById('goBtn');
     b.textContent = 'Generando tu suscripción…'; b.disabled = true;
-    window.location.href = `${CHECKOUT}?plan=${planElegido}&email=${encodeURIComponent(email)}`;
+    let u = `${CHECKOUT}?plan=${planElegido}&email=${encodeURIComponent(email)}`;
+    if (appEmail) u += `&app_email=${encodeURIComponent(appEmail)}`;
+    window.location.href = u;
   });
 </script>
 </body>
