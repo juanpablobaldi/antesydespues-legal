@@ -174,8 +174,19 @@ Elegí tu plan y tu clínica queda activada en el día.</p>
       style="width:100%;background:none;border:none;color:#888;font-size:14px;margin-top:10px;cursor:pointer">Cancelar</button>
   </form>
 </dialog>
+<div id="errorBanner" style="display:none;background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;border-radius:12px;padding:14px 18px;margin:0 0 20px;font-size:15px"></div>
 <script>
   const CHECKOUT = 'https://qjngfuvnktpbyeodspjo.supabase.co/functions/v1/mp-checkout';
+  // Errores del checkout vuelven por query param
+  const params = new URLSearchParams(location.search);
+  if (params.get('error')) {
+    const b = document.getElementById('errorBanner');
+    b.textContent = '⚠️ ' + params.get('error') + (params.get('detalle') ? ' (' + params.get('detalle') + ')' : '');
+    document.querySelector('.grid').before(b);
+    b.style.display = 'block';
+    b.scrollIntoView({behavior:'smooth', block:'center'});
+    history.replaceState(null, '', location.pathname);
+  }
   let planElegido = null;
   const dlg = document.getElementById('emailDialog');
   document.querySelectorAll('.cta[data-plan]').forEach((btn) => {
