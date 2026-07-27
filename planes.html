@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Planes — Antes y Después: Fotos</title>
+<meta name="robots" content="noindex">
+<!--
+  ══════════════════════════════════════════════════════════════════
+  PÁGINA NO LISTADA — se comparte SOLO por WhatsApp / canales directos.
+  NO linkear desde index.html ni desde terminos/privacy: esas páginas
+  están referenciadas en la metadata del App Store y Apple no permite
+  dirigir a compras externas desde la app o su metadata.
+
+  PARA ACTIVAR LOS BOTONES: crear las 3 suscripciones en el panel de
+  Mercado Pago (cuenta empresa → Suscripciones → Crear) y reemplazar
+  los tres href="PEGAR_LINK_MP_..." de abajo. Los precios: editar los
+  <div class="price"> (sugerencia: precio de tienda en ARS − 10‑15%).
+  ══════════════════════════════════════════════════════════════════
+-->
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6; color: #1a1a1a; background: #fff;
+    max-width: 980px; margin: 0 auto; padding: 40px 20px 80px;
+  }
+  h1 { font-size: 30px; letter-spacing: -0.5px; margin-bottom: 4px; }
+  .sub { color: #666; margin-bottom: 36px; font-size: 17px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+  .card {
+    border: 1px solid #e5e5e8; border-radius: 16px; padding: 24px 22px;
+    display: flex; flex-direction: column;
+  }
+  .card.recommended { border: 2px solid #4f46e5; position: relative; }
+  .badge {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: #4f46e5; color: #fff; font-size: 12px; font-weight: 700;
+    padding: 3px 12px; border-radius: 99px; white-space: nowrap;
+  }
+  .plan-name { font-size: 20px; font-weight: 700; }
+  .price { font-size: 26px; font-weight: 800; margin: 6px 0 2px; }
+  .per { color: #888; font-size: 14px; margin-bottom: 14px; }
+  ul { list-style: none; padding: 0; margin: 0 0 20px; flex: 1; }
+  li { margin: 8px 0; font-size: 15px; padding-left: 24px; position: relative; }
+  li::before { content: "✓"; position: absolute; left: 0; color: #4f46e5; font-weight: 700; }
+  .cta {
+    display: block; text-align: center; background: #4f46e5; color: #fff;
+    font-weight: 700; font-size: 16px; padding: 13px 16px; border-radius: 12px;
+    text-decoration: none;
+  }
+  .cta:hover { opacity: 0.92; }
+  .note { background: #f5f5f7; border-radius: 12px; padding: 16px 20px; font-size: 15px; margin-top: 32px; }
+  .note strong { color: #4f46e5; }
+  .faq h2 { font-size: 19px; margin-top: 36px; border-top: 1px solid #eee; padding-top: 24px; }
+  .faq p { color: #555; font-size: 15px; }
+  a.plain { color: #4f46e5; }
+  @media (prefers-color-scheme: dark) {
+    body { color: #e8e8ea; background: #111; }
+    .sub, .per { color: #999; }
+    .card { border-color: #2a2a2a; }
+    .note { background: #1c1c1e; }
+    .faq h2 { border-color: #2a2a2a; }
+    .faq p { color: #aaa; }
+    a.plain { color: #8b8bf5; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Planes — Antes y Después: Fotos</h1>
+<p class="sub">Suscripción directa con <strong>Mercado Pago</strong> en pesos, sin pasar por las tiendas.
+Elegí tu plan y tu clínica queda activada en el día.</p>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="plan-name">Profesional</div>
+    <div class="price">$ —</div>
+    <div class="per">por mes · en pesos, con Mercado Pago</div>
+    <ul>
+      <li>Comparativas y anotaciones</li>
+      <li>Cámara fantasma con guía de ángulo y distancia</li>
+      <li>Exportación de video (deslizador y desvanecer)</li>
+      <li>Hasta 1.000 fotos</li>
+      <li>1 profesional</li>
+    </ul>
+    <a class="cta" href="PEGAR_LINK_MP_PROFESIONAL">Suscribirme con Mercado Pago</a>
+  </div>
+
+  <div class="card recommended">
+    <div class="badge">MÁS ELEGIDO</div>
+    <div class="plan-name">Clínica</div>
+    <div class="price">$ —</div>
+    <div class="per">por mes · en pesos, con Mercado Pago</div>
+    <ul>
+      <li>Todo lo de Profesional</li>
+      <li>Hasta 3 profesionales</li>
+      <li>Hasta 15.000 fotos</li>
+      <li>Videos en sesiones de fotos (10 seg)</li>
+    </ul>
+    <a class="cta" href="PEGAR_LINK_MP_CLINICA">Suscribirme con Mercado Pago</a>
+  </div>
+
+  <div class="card">
+    <div class="plan-name">Clínica Pro</div>
+    <div class="price">$ —</div>
+    <div class="per">por mes · en pesos, con Mercado Pago</div>
+    <ul>
+      <li>Todo lo de Clínica</li>
+      <li>Hasta 10 profesionales</li>
+      <li>Hasta 100.000 fotos</li>
+      <li>Acceso anticipado a funciones de IA</li>
+    </ul>
+    <a class="cta" href="PEGAR_LINK_MP_CLINICA_PRO">Suscribirme con Mercado Pago</a>
+  </div>
+
+</div>
+
+<div class="note">
+  <strong>Importante:</strong> al suscribirte, usá el <strong>mismo email con el que creaste tu
+  cuenta en la app</strong> — así identificamos tu clínica y activamos el plan sin demoras.
+  Si aún no tenés cuenta, descargá la app y creala antes de suscribirte.
+</div>
+
+<div class="faq">
+  <h2>¿Cómo funciona?</h2>
+  <p>Pagás tu suscripción con Mercado Pago (tarjeta, dinero en cuenta o lo que tengas asociado).
+  Nosotros activamos el plan en tu clínica dentro del día — te llega listo la próxima vez que
+  abras la app. No hay que configurar nada.</p>
+
+  <h2>¿Puedo cancelar?</h2>
+  <p>Sí, cuando quieras, desde tu cuenta de Mercado Pago (Suscripciones). El plan sigue activo
+  hasta el final del período que ya pagaste.</p>
+
+  <h2>¿En qué se diferencia de suscribirme en la app?</h2>
+  <p>Es el mismo plan y las mismas funciones. La diferencia es el medio de pago: acá pagás en
+  pesos por Mercado Pago; en la app pagás por App Store o Google Play con los precios de tienda.</p>
+
+  <h2>¿Facturación?</h2>
+  <p>Emitimos comprobante por cada pago. Escribinos a
+  <a class="plain" href="mailto:juampibaldi@gmail.com">juampibaldi@gmail.com</a> con tus datos fiscales.</p>
+
+  <h2>Términos y privacidad</h2>
+  <p><a class="plain" href="terminos.html">Términos y Condiciones</a> ·
+  <a class="plain" href="privacy.html">Política de Privacidad</a></p>
+</div>
+
+</body>
+</html>
